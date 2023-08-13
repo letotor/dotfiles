@@ -45,7 +45,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+a kill
@@ -190,13 +190,14 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# start terminal
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
 # Couleur de fond
 set $bg-color #1c1c1c
 # Couleur de texte
-set $text-color #d8d8d8
+set $text-color #feabe3
 # Couleur de bordure
 set $border-color #444444
 
@@ -208,35 +209,41 @@ set $border_color #3B4252
 set $focus_color #81A1C1
 
 # Configuration des couleurs
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   
+client.focused         #9f77ff #9f77ff #F8F8F2 #6272A4   
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
-client.background       #F8F8F2
-
 bar {
-  font pango:monospace 11
-
+  font pango:Victor Mono 14
+  tray_output primary
+  
   colors {
     background #282A36
     statusline #F8F8F2
     separator  #44475A
 
-    focused_workspace  #44475A #44475A #F8F8F2
+    focused_workspace  #f76c6c #f76c6c #F8F8F2
     active_workspace   #282A36 #44475A #F8F8F2
     inactive_workspace #282A36 #282A36 #BFBFBF
     urgent_workspace   #FF5555 #FF5555 #F8F8F2
     binding_mode       #FF5555 #FF5555 #F8F8F2
   }
   status_command i3status
+  i3bar_command i3bar
 }
 # Activer les bordures arrondies pour les fenêtres sélectionnées
 
 # Activer les bordures arrondies pour les fenêtres sélectionnées
-
+#xrandr --output DP-1 --auto --output DP-2--mode 2560x1440 --right-of DP-1
 # Activer les bordures arrondies pour les fenêtres sélectionnées
 # Activer les bordures arrondies pour les fenêtres de la classe "myclass"
 for_window [class="*"] border pixel 8 round
+bindsym $mod+Shift+q kill
+assign [class="^terminator$"] "1:terminator"
 
+#Start applications
+bindsym $mod+Return exec terminator
+bindsym $mod+Shift+f exec thunar
+# Qobuz
+bindsym F1 exec brave-browser-nightly  https://play.qobuz.com/featured

@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 12
+font pango:monospace 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -48,10 +48,11 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+a kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -121,9 +122,9 @@ bindsym $mod+q focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
+set $ws1 "1: code"
+set $ws2 "2: app-dev"
+set $ws3 "3: web"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -132,6 +133,27 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+#Define variables monitor
+set $monitorLaptopCenter eDP-1
+set $monitorLeft DP-1-2
+set $monitorRight DP-1-3
+#define mapping with workspace and screen
+workspace $ws1 output $monitorLaptopCenter
+workspace $ws4 output $monitorLaptopCenter
+workspace $ws7 output $monitorLaptopCenter
+workspace $ws2 output $monitorLeft
+workspace $ws5 output $monitorLeft
+workspace $ws8 output $monitorLeft
+workspace $ws3 output $monitorRight
+workspace $ws6 output $monitorRight
+workspace $ws9 output $monitorRight
+
+# assignation des applications au workspace ( vscode toujours sur monitor 1) pour connaitre la class faire  xprop | grep WM_CLASS 
+assign [class="Code"] $ws1 
+# pour forcer sur le workspace 1 
+# for_assign [class="Code"] move to workspace $ws1 
+assign [class="Brave-browser"] $ws1 
+assign [class="^terminator$"] "1:terminator"
 # switch to workspace
 bindsym $mod+ampersand workspace number $ws1
 bindsym $mod+eacute workspace number $ws2
@@ -167,7 +189,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
+        #p Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
@@ -215,7 +237,7 @@ client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 bar {
-  font pango:Victor Mono 14
+  font pango:Victor Mono 11
   tray_output primary
   
   colors {
@@ -238,12 +260,29 @@ bar {
 #xrandr --output DP-1 --auto --output DP-2--mode 2560x1440 --right-of DP-1
 # Activer les bordures arrondies pour les fenêtres sélectionnées
 # Activer les bordures arrondies pour les fenêtres de la classe "myclass"
-for_window [class="*"] border pixel 8 round
-bindsym $mod+Shift+q kill
-assign [class="^terminator$"] "1:terminator"
 
 #Start applications
 bindsym $mod+Return exec terminator
 bindsym $mod+Shift+f exec thunar
 # Qobuz
 bindsym F1 exec brave-browser-nightly  https://play.qobuz.com/featured
+
+# applications au demarage
+exec --no-startup-id discord
+
+# Désactive capslock
+exec --no-startup-id setxkbmap fr -option caps:none
+
+# I3 Gaps
+for_window [class="^.*"] border pixel 2
+for_window [class=".*"] title_format "  %title"
+for_window [class="*"] border pixel 8 round
+
+
+
+gaps inner 7
+smart_borders on
+smart_gaps on
+
+# Redémarre polybar quand on redémarre i3
+exec_always --no-startup-id "killall polybar;polybar -r center & polybar -r left & polybar -r right"

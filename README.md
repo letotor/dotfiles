@@ -28,6 +28,8 @@ Thème : **Tokyo Night** sur l'ensemble du bureau.
 
 ## Polybar
 
+![Polybar](screenshots/polybar.png)
+
 - Workspaces i3 à gauche
 - Date/heure au centre
 - Modules à droite : `keybindings` `screenshot` `volume` `RAM` `CPU` `wifi` `batterie`
@@ -46,6 +48,8 @@ Thème custom `tokyonight.rasi` :
 ---
 
 ## Dunst
+
+![Dunst](screenshots/dunst.png)
 
 Notifications Tokyo Night par urgence :
 

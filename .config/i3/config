@@ -309,9 +309,10 @@ bindsym $mod+Print exec --no-startup-id flameshot gui --region
 # Hide borders at the edge of the screen
 hide_edge_borders smart
 
-gaps inner 7
+gaps inner 6
+gaps bottom 2
 smart_borders on
-smart_gaps on
+smart_gaps inverse_outer
 
 
 # Redémarre polybar quand on redémarre i3
@@ -327,6 +328,7 @@ assign [class="crx_edcmabgkbicempmpgmniellhbjopafjh"] $ws1  # ClickUp
 
 # Démarrage automatique avec positionnement dans les workspaces
 exec --no-startup-id i3-msg "workspace $ws1; exec brave --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo"  # Teams
-exec --no-startup-id i3-msg "workspace $ws3; exec windsurf"  # VSCode
 exec --no-startup-id i3-msg "workspace $ws1; exec brave --app-id=edcmabgkbicempmpgmniellhbjopafjh"  # ClickUp
+exec --no-startup-id i3-msg "workspace $ws1; exec brave --app-id=fmpnliohjhemenmnlpbfagaolkdacoja"  # Claude
+exec --no-startup-id i3-msg "workspace $ws1; exec brave --app-id=cadlkienfkclaiaibeoongdcgmdikeeg"  # ChatGPT
 

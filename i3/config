@@ -59,6 +59,7 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id dmenu_run
 #bindsym $mod+d exec --no-startup-id rofi -show drun -theme arthur by Qball
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/tokyonight.rasi
+bindsym ctrl+l exec --no-startup-id ~/bin/lock.sh
 # A more modern dmenu replacement is rofi:
 #bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a

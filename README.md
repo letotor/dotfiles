@@ -19,10 +19,12 @@ Thème : **Tokyo Night** sur l'ensemble du bureau.
 | Bar             | Polybar                |
 | Launcher        | Rofi                   |
 | Notifications   | Dunst                  |
-| Terminal        | Kitty                  |
+| Terminal        | Alacritty              |
 | Police          | Victor Mono            |
 | Icônes          | Font Awesome 6         |
 | Compositor      | Picom                  |
+| Verrouillage    | i3lock + blur          |
+| Thème GTK       | Catppuccin Mocha Mauve |
 
 ---
 
@@ -69,6 +71,41 @@ Raccourcis notables :
 - `F1` → Qobuz
 - `F2` → btop (moniteur système)
 - `Super + d` → Rofi launcher
+- `Ctrl + L` → Verrouillage écran
+
+---
+
+## Écran de verrouillage
+
+Script `bin/lock.sh` — capture l'écran, applique un blur Gaussian (ImageMagick), puis lance `i3lock`.
+
+> L'image de fond personnalisée (`lockscreen.png`) n'est pas trackée dans ce repo (fichier lourd ~6 Mo).
+> Placer l'image dans `~/Pictures/lockscreen.png` pour l'utiliser avec `betterlockscreen -u ~/Pictures/lockscreen.png`.
+
+---
+
+## Thème système (Fedora / GNOME)
+
+Paramètres exportés dans `config/dconf/desktop.conf` :
+- GTK : `catppuccin-mocha-mauve-standard+default`
+- Mode sombre activé
+- Accent : `purple`
+
+Restaurer avec :
+```bash
+dconf load /org/gnome/desktop/interface/ < config/dconf/desktop.conf
+```
+
+---
+
+## Scripts (`bin/`)
+
+| Script               | Rôle                                      |
+|----------------------|-------------------------------------------|
+| `lock.sh`            | Verrouillage avec blur i3lock             |
+| `resume-monitors.sh` | Relance xrandr après réveil veille        |
+| `polybar-ip.sh`      | Affiche l'IP locale dans la polybar       |
+| `keybindings.sh`     | Menu rofi des raccourcis i3               |
 
 ---
 
@@ -82,9 +119,16 @@ cd dotfiles
 cp -r .config/i3       ~/.config/i3
 cp -r .config/polybar  ~/.config/polybar
 cp -r .config/rofi     ~/.config/rofi
-cp -r .config/dunst    ~/.config/dunst
-cp bin/keybindings.sh  ~/bin/keybindings.sh
-chmod +x ~/bin/keybindings.sh
+cp -r config/dunst        ~/.config/dunst
+cp -r config/alacritty    ~/.config/alacritty
+cp bin/lock.sh            ~/bin/lock.sh
+cp bin/resume-monitors.sh ~/bin/resume-monitors.sh
+cp bin/polybar-ip.sh      ~/bin/polybar-ip.sh
+cp bin/keybindings.sh     ~/bin/keybindings.sh
+chmod +x ~/bin/*.sh
+
+# Restaurer le thème GNOME/GTK
+dconf load /org/gnome/desktop/interface/ < config/dconf/desktop.conf
 ```
 
 ---

@@ -1,0 +1,19 @@
+# Onglet 1 - VPN
+new_tab 🔒 VPN
+launch zsh -c "tmux attach-session -t vpn 2>/dev/null || tmux new-session -s vpn 'sudo openfortivpn'"
+
+# Onglet 2 - LOCAL
+new_tab LOCAL
+launch zsh
+
+# Onglet 3 - DEV.153
+new_tab DEV.153
+launch zsh -c "sleep 2 && ~/bin/kitty-tab-color.sh '#4db84d' '#1a4a1a'; ssh srvdeg -t 'tmux attach-session 2>/dev/null || tmux new-session -s main'; kitty @ set-tab-title DEV.153; zsh"
+
+# Onglet 4 - STAGING .154
+new_tab STAGING .154
+launch zsh -c "sleep 2 && ~/bin/kitty-tab-color.sh '#e6c800' '#6b5c00'; ssh test.eam.Energieteam.Fr -t 'tmux attach-session 2>/dev/null || tmux new-session -s main'; kitty @ set-tab-title 'STAGING .154'; ~/bin/kitty-tab-color.sh '#e6c800' '#6b5c00'; zsh"
+
+# Onglet 5 - PROD Jenkins
+new_tab 🔴 PROD
+launch zsh -c "sleep 2 && ~/bin/kitty-tab-color.sh '#e63333' '#6b0000' '#2a0000'; ssh jenkins -t 'tmux attach-session 2>/dev/null || tmux new-session -s main'; kitty @ set-tab-title '🔴 PROD'; ~/bin/kitty-tab-color.sh '#e63333' '#6b0000' '#2a0000'; zsh"

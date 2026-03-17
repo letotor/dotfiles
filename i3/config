@@ -264,7 +264,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+F10 exec flameshot gui
 bindsym $mod+t exec --no-startup-id ~/bin/teams-toggle.sh
-bindsym $mod+Shift+t exec --no-startup-id ~/bin/teams-priority.sh
+bindsym $mod+y exec --no-startup-id ~/bin/teams-priority.sh
 bindsym $mod+u exec --no-startup-id ~/bin/clickup-toggle.sh
 # btop
 bindsym F1 exec kitty -e btop

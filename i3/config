@@ -263,10 +263,10 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+F10 exec flameshot gui
-# Qobuz
-bindsym F1 exec brave-browser https://play.qobuz.com/featured
 # btop
-bindsym F2 exec kitty -e btop
+bindsym F1 exec kitty -e btop
+# Qobuz
+bindsym F2 exec brave-browser --new-window --app=https://play.qobuz.com/featured
 
 
 
@@ -284,8 +284,8 @@ for_window [title="prod"] border pixel 8
 bindsym Print exec --no-startup-id env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=x11 flameshot full -p /home/vgermain/Images/ -c
 # Sélection interactive avec outils annotation
 bindsym Shift+Print exec --no-startup-id env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=x11 flameshot gui
-# Fenêtre active → clipboard
-bindsym Ctrl+Print exec --no-startup-id env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=x11 flameshot screen -c
+# Fenêtre active → fichier + clipboard
+bindsym Ctrl+Print exec --no-startup-id ~/bin/screenshot-window.sh
 # Annotation (mode complet avec GUI)
 bindsym $mod+Print exec --no-startup-id env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=x11 flameshot gui --region
 
@@ -317,10 +317,15 @@ exec --no-startup-id nm-applet
 exec --no-startup-id lxpolkit
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec --no-startup-id env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=x11 flameshot
+exec --no-startup-id copyd
 
 # --- Clipboard ---
-exec --no-startup-id env QT_QPA_PLATFORM=xcb copyq
+exec --no-startup-id bash -c 'sleep 3 && env QT_QPA_PLATFORM=xcb copyq'
 bindsym $mod+c exec --no-startup-id ~/bin/clipboard-rofi.sh
+
+# --- XDG Desktop Portal (requis pour systray Qt6) ---
+exec --no-startup-id bash -c 'sleep 2 && /usr/libexec/xdg-desktop-portal-gtk'
+exec --no-startup-id bash -c 'sleep 3 && /usr/libexec/xdg-desktop-portal'
 
 # --- Services arrière-plan ---
 exec --no-startup-id bash -c 'export GTK_THEME=catppuccin-mocha-mauve-standard+default && thunar --daemon'
@@ -339,4 +344,5 @@ exec --no-startup-id sleep 4 && brave-browser --ozone-platform=x11 --app-id=fmpn
 exec --no-startup-id sleep 5 && brave-browser --ozone-platform=x11 --app-id=cadlkienfkclaiaibeoongdcgmdikeeg  # ChatGPT
 exec --no-startup-id sleep 6 && flatpak run --env=ELECTRON_OZONE_PLATFORM_HINT=x11 com.github.IsmaelMartinez.teams_for_linux
 exec --no-startup-id sleep 7 && flatpak run --env=ELECTRON_OZONE_PLATFORM_HINT=x11 rest.insomnia.Insomnia --ozone-platform=x11
+exec --no-startup-id sleep 8 && brave-browser --ozone-platform=x11 --app=https://mail.google.com/  # Gmail
 

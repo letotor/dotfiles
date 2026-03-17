@@ -6,8 +6,12 @@ if [ -z "$PIDS" ]; then
     exit 0
 fi
 
-FIRST_PID=$(echo "$PIDS" | head -1)
-CURRENT_NICE=$(cat /proc/$FIRST_PID/stat 2>/dev/null | awk '{print $19}')
+# Prendre le premier process vivant (pas zombie)
+FIRST_PID=$(echo "$PIDS" | while read p; do
+    state=$(awk '/^State:/{print $2}' /proc/$p/status 2>/dev/null)
+    [ "$state" != "Z" ] && echo $p && break
+done)
+CURRENT_NICE=$(awk '{print $19}' /proc/$FIRST_PID/stat 2>/dev/null)
 
 if [ "$CURRENT_NICE" -gt 0 ]; then
     echo "$PIDS" | xargs renice -n 0 -p 2>/dev/null

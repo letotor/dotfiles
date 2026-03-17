@@ -18,5 +18,5 @@ if [ "$CURRENT_NICE" -gt 0 ]; then
     notify-send -i preferences-system "Teams" "Mode réunion\nPriorité Linux : nice 0 (normale)" -t 3000
 else
     echo "$PIDS" | xargs renice -n 10 -p 2>/dev/null
-    notify-send -u low -i preferences-system "Teams" "Mode arrière-plan\nPriorité Linux : nice +10 (basse)" -t 3000
+    notify-send -i preferences-system "Teams" "Mode arrière-plan\nPriorité Linux : nice +10 (basse)" -t 3000
 fi

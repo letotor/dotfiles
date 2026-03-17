@@ -263,6 +263,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+F10 exec flameshot gui
+bindsym $mod+t exec --no-startup-id ~/bin/teams-toggle.sh
 # btop
 bindsym F1 exec kitty -e btop
 # Qobuz

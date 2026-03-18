@@ -17,8 +17,8 @@ if type "xrandr" > /dev/null; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     case $m in
       eDP-1)   MONITOR=$m polybar -r left &  ;;
-      DP-1-2)  MONITOR=$m polybar -r center & ;;
-      DP-1-3)  MONITOR=$m polybar -r right &  ;;
+      HDMI-1)  MONITOR=$m polybar -r center & ;;
+      DP-1)    MONITOR=$m polybar -r right &  ;;
     esac
   done
 fi

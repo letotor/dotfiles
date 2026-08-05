@@ -1,0 +1,119 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "permission": {
+    "bash": {
+      "*": "allow",
+
+      //
+      // Lecture — sans prompt
+      //
+      "ls*": "allow",
+      "cat*": "allow",
+
+      "grep*": "allow",
+      "find*": "allow",
+      "pwd*": "allow",
+      "echo*": "allow",
+
+      "node*": "allow",
+      "node -e*": "ask",
+      "node --eval*": "ask",
+      "npm*": "allow",
+      "npm exec*": "ask",
+      "pnpm*": "allow",
+      "npx*": "ask",
+
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git grep*": "allow",
+      "git pull*": "allow",
+      "git clone*": "allow",
+      "git fetch*": "allow",
+
+      //
+      // Modification de fichiers — ask
+      //
+      "cp*": "ask",
+      "mv*": "ask",
+      "rm*": "ask",
+      "chmod*": "ask",
+      "chown*": "ask",
+      "mkdir*": "allow",
+      "rmdir*": "ask",
+      "ln*": "ask",
+      "touch*": "allow",
+
+      "python*": "ask",
+      "python3*": "ask",
+
+      //
+      // Git modifiant le dépôt — ask
+      //
+      "git add*": "ask",
+      "git commit*": "ask",
+      "git push*": "ask",
+      "git checkout*": "ask",
+      "git switch*": "ask",
+      "git merge*": "ask",
+      "git rebase*": "ask",
+      "git cherry-pick*": "ask",
+      "git revert*": "ask",
+      "git reset*": "ask",
+      "git restore*": "ask",
+      "git clean*": "ask",
+      "git stash*": "ask",
+      "git tag*": "ask",
+      "git branch*": "ask",
+      "git branch": "allow",
+      "git branch --show-current": "allow",
+      "git rm*": "ask",
+
+      //
+      // Commandes dangereuses — deny (placées APRÈS les ask pour gagner)
+      //
+      "sudo*": "deny",
+      "dd*": "deny",
+      "mkfs*": "deny",
+      "fdisk*": "deny",
+      "parted*": "deny",
+      "wipefs*": "deny",
+      "shutdown*": "deny",
+      "reboot*": "deny",
+      "poweroff*": "deny",
+      "halt*": "deny",
+      "systemctl poweroff*": "deny",
+      "systemctl reboot*": "deny",
+
+      //
+      // Suppressions massives — deny
+      //
+      "rm -rf /*": "deny",
+      "rm -rf /": "deny",
+      "rm -rf .": "deny",
+      "rm -rf ..": "deny",
+      "rm -rf *": "deny",
+      "find* -delete*": "deny",
+      "find* -exec rm*": "deny",
+      "git clean -fd*": "deny",
+      "git clean -xdf*": "deny",
+
+      //
+      // Téléchargements — ask
+      //
+      "curl*": "ask",
+      "wget*": "ask",
+
+      //
+      // Shells (y compris pipe vers shell) — deny
+      // Placés APRÈS curl*/wget* : le dernier motif gagnant, donc `curl ... | sh` reste refusé
+      //
+      "sh*": "deny",
+      "bash*": "deny",
+      "dash*": "deny",
+      "zsh*": "deny",
+    },
+  },
+}
